@@ -1,24 +1,21 @@
 package com.gdg.restapi.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@AllArgsConstructor
 public class Track {
-    private UUID id;
+    private final UUID id;
+
+    // 수정 가능한 거 의도된 것입니다.
+    @Setter
+    private UUID projectId;
 
     @Setter
     private String name;
-
-    @Setter
-    private String audioPath;
-
-    private Double duration;
-    private Double startTime;
-    private Double endTime;
 
     @Setter
     private Double volume;
@@ -26,15 +23,29 @@ public class Track {
     @Setter
     private Boolean muted;
 
-    public void update(Double duration, Double startTime, Double endTime) {
-        if (duration != null) {
-            this.duration = duration;
+    private final List<AudioClip> audioClips;
+
+    public Track(UUID id, UUID projectId) {
+        this.id = id;
+        this.projectId = projectId;
+        this.name = "track";
+        this.volume = 100.0;
+        this.muted = false;
+        this.audioClips = new ArrayList<>();
+    }
+
+    public void update(UUID projectId, String name, Double volume, Boolean muted) {
+        if (projectId != null) {
+            this.projectId = projectId;
         }
-        if (startTime != null) {
-            this.startTime = startTime;
+        if (name != null) {
+            this.name = name;
         }
-        if (endTime != null) {
-            this.endTime = endTime;
+        if (volume != null) {
+            this.volume = volume;
+        }
+        if (muted != null) {
+            this.muted = muted;
         }
     }
 }

@@ -32,10 +32,4 @@ public class ProjectRepository {
     public boolean deleteById(UUID id) {
         return projects.remove(id) != null;
     }
-
-//    public void patch(UUID id, String title) {
-//        Project foundProject = get(id);
-//        foundProject.setTitle(title);
-//    }
-//
 }
