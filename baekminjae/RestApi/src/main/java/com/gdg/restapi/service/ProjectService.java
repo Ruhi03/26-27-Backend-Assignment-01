@@ -4,16 +4,20 @@ import com.gdg.restapi.domain.Project;
 import com.gdg.restapi.dto.project.ProjectLoadResponse;
 import com.gdg.restapi.dto.project.ProjectTitleRequest;
 import com.gdg.restapi.repository.ProjectRepository;
-import org.springframework.stereotype.Service;
+import com.gdg.restapi.repository.TrackRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
 public class ProjectService {
     private final ProjectRepository projectRepository;
+    private final TrackRepository trackRepository;
 
     public ProjectLoadResponse create(ProjectTitleRequest request) {
         // 입력된 프로젝트 이름이 Null 이면 "기본 프로젝트"로 반환
@@ -38,21 +42,27 @@ public class ProjectService {
 
     public ProjectLoadResponse loadById(UUID id) {
         Project project = projectRepository.loadById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 프로젝트입니다."));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "존재하지 않는 프로젝트입니다."));
 
         return new ProjectLoadResponse(project);
     }
 
     public ProjectLoadResponse renameById(UUID id, ProjectTitleRequest request) {
         Project project = projectRepository.renameById(id, request.getTitle())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 프로젝트입니다."));
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "존재하지 않는 프로젝트입니다."));
 
         return new ProjectLoadResponse(project);
     }
 
     public void deleteById(UUID id) {
-        if (!projectRepository.deleteById(id)) {
-            throw new IllegalArgumentException("존재하지 않는 프로젝트입니다.");
+        if (!projectRepository.existsById(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "존재하지 않는 프로젝트입니다.");
         }
+
+        trackRepository.deleteAllByProjectId(id);
+        projectRepository.deleteById(id);
     }
 }

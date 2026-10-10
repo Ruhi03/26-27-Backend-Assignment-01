@@ -6,7 +6,8 @@ import lombok.Setter;
 
 @AllArgsConstructor
 public class AudioClip {
-    private UUID id;
+    private final UUID id;
+    private UUID trackId;
 
     @Setter
     private String audioPath;

@@ -1,9 +1,13 @@
 package com.gdg.restapi.repository;
 
 import com.gdg.restapi.domain.Track;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import java.util.*;
 
 @Repository
 @RequiredArgsConstructor
@@ -20,11 +24,17 @@ public class TrackRepository {
                 .toList();
     }
 
-    public  Optional<Track> loadById(UUID id) {
+    public Optional<Track> loadById(UUID id) {
         return Optional.ofNullable(tracks.get(id));
     }
 
-    public boolean deleteById(UUID id) {
-        return tracks.remove(id) != null;
+    public void deleteById(UUID id) {
+        tracks.remove(id);
+    }
+
+    public void deleteAllByProjectId(UUID projectId) {
+        tracks.values().removeIf(
+                track -> track.getProjectId().equals(projectId)
+        );
     }
 }

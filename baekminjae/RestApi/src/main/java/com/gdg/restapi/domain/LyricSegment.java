@@ -7,7 +7,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class LyricSegment {
-    private UUID id;
+    private final UUID id;
+    private UUID lyricsId;
     private String text;
     private Double startTime;  // 초 단위, 싱크 전에는 null
     private Double endTime;

@@ -7,7 +7,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Note {
-    private UUID id;
+    private final UUID id;
+    private UUID trackId;
     private String text;
     private Double startTime;
     private Double endTime;
