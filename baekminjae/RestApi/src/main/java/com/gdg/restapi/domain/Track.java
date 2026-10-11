@@ -1,7 +1,6 @@
 package com.gdg.restapi.domain;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.UUID;
 
@@ -10,13 +9,8 @@ public class Track {
     private final UUID id;
     private final UUID projectId;
 
-    @Setter
     private String name;
-
-    @Setter
     private Double volume;
-
-    @Setter
     private Boolean muted;
 
     public Track(UUID id, UUID projectId) {

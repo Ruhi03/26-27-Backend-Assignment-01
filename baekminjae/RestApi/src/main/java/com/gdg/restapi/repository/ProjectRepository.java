@@ -18,7 +18,6 @@ public class ProjectRepository {
 
     // 저장소에 객체 저장하기
     public void create(Project project) {
-        // 입력된 Project 객체를 맵에 추가하기
         projects.put(project.getId(), project);
     }
 

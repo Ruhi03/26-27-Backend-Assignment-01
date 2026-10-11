@@ -63,6 +63,7 @@ public class ProjectService {
                     HttpStatus.NOT_FOUND, "존재하지 않는 프로젝트입니다.");
         }
 
+        // 입력된 프로젝트 id를 가진 트랙도 전부 제거
         trackRepository.deleteAllByProjectId(id);
         projectRepository.deleteById(id);
     }

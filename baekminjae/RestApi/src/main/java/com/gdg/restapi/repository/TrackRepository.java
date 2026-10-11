@@ -1,7 +1,6 @@
 package com.gdg.restapi.repository;
 
 import com.gdg.restapi.domain.Track;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -11,8 +10,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-@RequiredArgsConstructor
 public class TrackRepository {
+    // Track 객체들을 모아두는 맵
     private final Map<UUID, Track> tracks = new HashMap<>();
 
     public void create(Track track) {
