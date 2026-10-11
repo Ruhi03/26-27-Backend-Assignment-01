@@ -1,8 +1,9 @@
 package com.gdg.restapi.dto.project;
 
 import com.gdg.restapi.domain.Project;
-import java.util.UUID;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Getter
 public class ProjectLoadResponse {

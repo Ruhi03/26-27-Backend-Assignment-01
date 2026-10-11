@@ -1,8 +1,9 @@
 package com.gdg.restapi.domain;
 
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
+
+import java.util.UUID;
 
 @AllArgsConstructor
 public class AudioClip {

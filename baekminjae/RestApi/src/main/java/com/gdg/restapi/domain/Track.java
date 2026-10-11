@@ -1,8 +1,9 @@
 package com.gdg.restapi.domain;
 
-import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.UUID;
 
 @Getter
 public class Track {

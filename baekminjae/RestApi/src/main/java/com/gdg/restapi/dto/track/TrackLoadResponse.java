@@ -1,8 +1,9 @@
 package com.gdg.restapi.dto.track;
 
 import com.gdg.restapi.domain.Track;
-import java.util.UUID;
 import lombok.Getter;
+
+import java.util.UUID;
 
 @Getter
 public class TrackLoadResponse {
