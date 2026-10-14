@@ -5,6 +5,6 @@ import lombok.Getter;
 @Getter
 public class TrackUpdateRequest {
     private String name;
-    private Double volume;
+    private Double volumeDb;
     private Boolean muted;
 }

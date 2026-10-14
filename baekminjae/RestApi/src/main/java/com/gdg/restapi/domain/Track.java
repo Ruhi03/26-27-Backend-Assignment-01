@@ -10,23 +10,23 @@ public class Track {
     private final UUID projectId;
 
     private String name;
-    private Double volume;
+    private Double volumeDb;
     private Boolean muted;
 
     public Track(UUID id, UUID projectId) {
         this.id = id;
         this.projectId = projectId;
         this.name = "track";
-        this.volume = 100.0;
+        this.volumeDb = 0.0;
         this.muted = false;
     }
 
-    public void update(String name, Double volume, Boolean muted) {
+    public void update(String name, Double volumeDb, Boolean muted) {
         if (name != null) {
             this.name = name;
         }
-        if (volume != null) {
-            this.volume = volume;
+        if (volumeDb != null) {
+            this.volumeDb = volumeDb;
         }
         if (muted != null) {
             this.muted = muted;

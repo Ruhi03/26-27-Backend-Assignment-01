@@ -45,13 +45,13 @@ public class TrackService {
         return track;
     }
 
-    // 입력된 볼륨의 값을 확인 후
+    // 볼륨이 입력된 경우 유한한 값이며 허용 범위(-60.0 ~ 12.0 dB) 내인지 검증
     // 조건을 만족하지 않을 경우 예외처리
-    private void validateVolume(Double volume) {
-        if (volume != null
-                && (!Double.isFinite(volume) || volume < 0 || volume > 100)) {
+    private void validateVolume(Double volumeDb) {
+        if (volumeDb != null
+                && (!Double.isFinite(volumeDb) || volumeDb < -60.0 || volumeDb > 12.0 )) {
             throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "볼륨은 0~100 사이여야 합니다.");
+                    HttpStatus.BAD_REQUEST, "볼륨 게인은 -60.0 ~ 12dB 사이여야 합니다.");
         }
     }
 
@@ -79,8 +79,8 @@ public class TrackService {
 
     public TrackLoadResponse update(UUID projectId, UUID id, TrackUpdateRequest request) {
         Track track = findTrack(projectId, id);
-        validateVolume(request.getVolume());
-        track.update(request.getName(), request.getVolume(), request.getMuted());
+        validateVolume(request.getVolumeDb());
+        track.update(request.getName(), request.getVolumeDb(), request.getMuted());
 
         return new TrackLoadResponse(track);
     }
