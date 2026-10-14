@@ -29,12 +29,6 @@ public class ProjectRepository {
         return Optional.ofNullable(projects.get(id));
     }
 
-    public Optional<Project> renameById(UUID id, String newTitle) {
-        Optional<Project> project = loadById(id);
-        project.ifPresent(value -> value.setTitle(newTitle));
-        return project;
-    }
-
     public void deleteById(UUID id) {
         projects.remove(id);
     }
