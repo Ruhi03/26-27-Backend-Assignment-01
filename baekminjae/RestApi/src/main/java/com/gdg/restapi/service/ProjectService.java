@@ -1,8 +1,9 @@
 package com.gdg.restapi.service;
 
 import com.gdg.restapi.domain.Project;
+import com.gdg.restapi.dto.project.ProjectCreateRequest;
 import com.gdg.restapi.dto.project.ProjectLoadResponse;
-import com.gdg.restapi.dto.project.ProjectTitleRequest;
+import com.gdg.restapi.dto.project.ProjectRenameRequest;
 import com.gdg.restapi.repository.ProjectRepository;
 import com.gdg.restapi.repository.TrackRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final TrackRepository trackRepository;
 
-    public ProjectLoadResponse create(ProjectTitleRequest request) {
+    public ProjectLoadResponse create(ProjectCreateRequest request) {
         // id 와 프로젝트 이름을 넣어 객체 생성하기
         Project project = new Project(UUID.randomUUID(), request.getTitle());
 
@@ -44,7 +45,7 @@ public class ProjectService {
         return new ProjectLoadResponse(project);
     }
 
-    public ProjectLoadResponse renameById(UUID id, ProjectTitleRequest request) {
+    public ProjectLoadResponse renameById(UUID id, ProjectRenameRequest request) {
         Project project = projectRepository.loadById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "존재하지 않는 프로젝트입니다."));

@@ -1,7 +1,8 @@
 package com.gdg.restapi.controller;
 
+import com.gdg.restapi.dto.project.ProjectCreateRequest;
 import com.gdg.restapi.dto.project.ProjectLoadResponse;
-import com.gdg.restapi.dto.project.ProjectTitleRequest;
+import com.gdg.restapi.dto.project.ProjectRenameRequest;
 import com.gdg.restapi.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class ProjectController {
 
     // 프로젝트 생성하기
     @PostMapping
-    public ResponseEntity<ProjectLoadResponse> create(@RequestBody ProjectTitleRequest request) {
+    public ResponseEntity<ProjectLoadResponse> create(@RequestBody ProjectCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(projectService.create(request));
     }
 
@@ -46,7 +47,7 @@ public class ProjectController {
     @PatchMapping("/{id}")
     public ResponseEntity<ProjectLoadResponse> renameById(
             @PathVariable UUID id,
-            @RequestBody ProjectTitleRequest request
+            @RequestBody ProjectRenameRequest request
     ) {
         return ResponseEntity.ok(projectService.renameById(id, request));
     }
